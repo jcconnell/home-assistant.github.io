@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Generic IP Camera"
-description: "Instructions how to integrate IP cameras within Home Assistant."
+description: "Instructions on how to integrate IP cameras within Home Assistant."
 date: 2015-07-11 0:36
 sidebar: true
 comments: false
@@ -36,6 +36,7 @@ Configuration variables:
 - **authentication** (*Optional*): Type for authenticating the requests `basic` (default) or `digest`.
 - **limit_refetch_to_url_change** (*Optional*): True/false value (default: false). Limits re-fetching of the remote image to when the URL changes. Only relevant if using a template to fetch the remote image.
 - **content_type** (*Optional*): Set the content type for the IP camera if it is not a jpg file (default: `image/jpeg`). Use `image/svg+xml` to add a dynamic svg file.
+- **framerate** (*Optional*): The number of frames-per-second (FPS) of the stream (setting this too high may cause too much traffic on the network or be heavy on the camera).
 
 <p class='img'>
   <a href='/cookbook/google_maps_card/'>

@@ -18,7 +18,8 @@ Set up [Mosquitto](https://mosquitto.org/) as MQTT broker.
   "ssl": false,
   "anonymous": true,
   "logins": [
-    {"username": "testuser", "password": "mypw"}
+    {"username": "testuser", "password": "mypw"},
+    {"username": "testuser2", "password": "mypw2"}
   ],
   "customize": {
     "active": false,
@@ -29,7 +30,7 @@ Set up [Mosquitto](https://mosquitto.org/) as MQTT broker.
 }
 ```
 
-<p class='note'>
+<p class='warning note'>
 Make sure you use logins and disable anonymous access if you want to secure the system.
 </p>
 
@@ -43,7 +44,7 @@ Configuration variables:
 
 ### {% linkable_title Home Assistant configuration %}
 
-To use the Mosquitto as [broker](/docs/mqtt/broker/#run-your-own) add the following entry to the `configuration.yaml` file.
+To use the Mosquitto as [broker](/docs/mqtt/broker/#run-your-own), add the following entry to the `configuration.yaml` file.
 
 ```yaml
 # Example configuration.yaml entry
@@ -59,3 +60,39 @@ mqtt:
   username: YOUR_USERNAME
   password: YOUR_PASSWORD
 ```
+
+### {% linkable_title Listening simultaneously on SSL/TLS (8883) and insecure (1883) ports %}
+
+1. Configure SSL/TLS as normal.
+2. Set `customize` flag to `true` in your configuration.
+3. Create a file in `/share/mosquitto` named `insecure.conf` with the following contents:
+
+```text
+listener 1883
+protocol mqtt
+```
+
+4. Restart MQTT
+
+<p class='note warning'>
+It's recommended that you only open your firewall to the SSL/TLS port (8883) and only use the insecure port (1883) for local devices. Also, disable `anonymous:` and set `logins:`.
+</p>
+
+### {% linkable_title Access Control Lists (ACLs) %}
+
+It is possible to restrict access to topics based upon the user logged in to Mosquitto. In this scenario it is recommended to create individual users for each of your clients and create an appropriate ACL.
+
+See the following links for more information:
+
+* [Mosquitto topic restrictions](http://www.steves-internet-guide.com/topic-restriction-mosquitto-configuration/)
+* [Mosquitto.conf man page](https://mosquitto.org/man/mosquitto-conf-5.html)
+
+Add the following configuration to enable ACLs:
+
+1. Set `customize` flag to `true` in your configuration.
+2. Create a file in `/share/mosquitto` named `acl.conf` with the following contents:
+
+```text
+acl_file /share/mosquitto/accesscontrollist
+```
+3. Create a file in `/share/mosquitto` named `accesscontrollist` and add contents according to your requirements.

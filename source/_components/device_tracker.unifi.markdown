@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Ubiquiti Unifi WAP"
-description: "Instructions how to use a Unifi WAP controller as a device tracker module."
+description: "Instructions on how to use a Unifi WAP controller as a device tracker module."
 date: 2016-02-19 20:59
 sidebar: true
 comments: false
@@ -20,8 +20,12 @@ To use this device tracker in your installation, add the following to your `conf
 # Example configuration.yaml entry
 device_tracker:
   - platform: unifi
-    username: USERNAME
-    password: PASSWORD
+    host: unifi
+    username: username
+    password: password
+    ssid_filter:
+      - 'HomeSSID'
+      - 'IoTSSID'
 ```
 
 {% configuration %}
@@ -56,8 +60,14 @@ verify_ssl:
 detection_time:
     description: How long since the last seen time before the device is marked away, specified in seconds.
     type: int
-    required: optional
+    required: false
     default: 300
+ssid_filter:
+    description: Filter the SSIDs that tracking will occur on.
+    type: list of strings
+    required: false
+    default: None
+
 {% endconfiguration %}
 
 See the [device tracker component page](/components/device_tracker/) for instructions how to configure the people to be tracked.
@@ -70,7 +80,7 @@ The Unifi controller allows you to create multiple users on it besides the main 
 
 The Unifi controller can either be a dedicated hardware device (Unifi's cloud key), or as software any Linux system. If you run the the Unifi controller on the same operating system as Home Assistant there may be conflicts in ports if you have the MQTT component as well.
 
-It is recommended that you run the Unifi controller in a dedicate virtual machine to avoid that situation.
+It is recommended that you run the Unifi controller in a dedicated virtual machine to avoid that situation.
 
 ### {% linkable_title Troubleshooting and Time Synchronization %}
 

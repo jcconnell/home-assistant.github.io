@@ -9,7 +9,7 @@ sharing: true
 footer: true
 logo: dark_sky.png
 ha_category: Weather
-featured: true
+featured: false
 ha_release: "0.30"
 redirect_from: /components/sensor.forecast/
 ha_iot_class: "Cloud Polling"
@@ -41,6 +41,46 @@ Configuration variables:
 - **api_key** (*Required*): Your API key.
 - **name** (*Optional*): Additional name for the sensors. Default to platform name.
 - **forecast** array (*Optional*): List of days in the 7 day forecast you would like to receive data on, starting with tomorrow as day 1. Any `monitored_condition` with a daily forecast by DarkSky will generate a sensor tagged with `_<day>`.
+- **language** (*Optional*): The desired language of the summary properties. Valid options are
+  - `ar`: Arabic
+  - `az`: Azerbaijani
+  - `be`: Belarusian
+  - `bg`: Bulgarian
+  - `bs`: Bosnian
+  - `ca`: Catalan
+  - `cs`: Czech
+  - `da`: Danish
+  - `de`: German
+  - `el`: Greek
+  - `en`: English (which is the default)
+  - `es`: Spanish
+  - `et`: Estonian
+  - `fi`: Finnish
+  - `fr`: French
+  - `hr`: Croatian
+  - `hu`: Hungarian
+  - `id`: Indonesian
+  - `is`: Icelandic
+  - `it`: Italian
+  - `ja`: Japanese
+  - `ka`: Georgian
+  - `kw`: Cornish
+  - `nb`: Norwegian Bokmål
+  - `nl`: Dutch
+  - `pl`: Polish
+  - `pt`: Portuguese
+  - `ro`: Romanian
+  - `ru`: Russian
+  - `sk`: Slovak
+  - `sl`: Slovenian
+  - `sr`: Serbian
+  - `sv`: Swedish
+  - `tet`: Tetum
+  - `tr`: Turkish
+  - `uk`: Ukrainian
+  - `x-pig-latin`: Igpay Atinlay
+  - `zh`: simplified Chinese
+  - `zh-tw`: traditional Chinese
 - **latitude** (*Optional*): Latitude coordinate to monitor weather of (required if **longitude** is specified), defaults to coordinates defined in your `configuration.yaml`
 - **longitude** (*Optional*): Longitude coordinate to monitor weather of (required if **latitude** is specified), defaults to coordinates defined in your `configuration.yaml`
 - **monitored_conditions** array (*Required*): Conditions to display in the frontend.
@@ -62,10 +102,10 @@ Configuration variables:
   - **minutely_summary**: A human-readable text summary for the next hour.
   - **hourly_summary**: A human-readable text summary for the next 24 hours.
   - **daily_summary**: A human-readable text summary for the next 7 days.
-  - **temperature_max**: Today's expected high temperature.
-  - **temperature_min**: Today's expected low temperature.
-  - **apparent_temperature_max**: Today's expected apparent high temperature.
-  - **apparent_temperature_min**: Today's expected apparent low temperature.
+  - **temperature_high**: Today's daytime expected high temperature.
+  - **temperature_low**: Today's overnight expected low temperature.
+  - **apparent_temperature_high**: Today's daytime expected apparent high temperature.
+  - **apparent_temperature_low**: Today's overnight expected apparent low temperature.
   - **precip_intensity_max**: Today's expected maximum intensity of precipitation.
   - **uv_index**: The current UV index.
 - **units** (*Optional*): Specify the unit system. Default to `si` or `us` based on the temperature preference in Home Assistant. Other options are `auto`, `us`, `si`, `ca`, `uk` and `uk2`.

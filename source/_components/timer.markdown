@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Timer"
-description: "Instructions how to integrate timers into Home Assistant."
+description: "Instructions on how to integrate timers into Home Assistant."
 date: 2017-10-23 06:00
 sidebar: true
 comments: false
@@ -107,30 +107,29 @@ timer:
 
 ```yaml
 # Example automations.yaml entry
-- action:
-  - service: timer.start
-    entity_id: timer.test
-  alias: Timerswitch
+- alias: Timerswitch
   id: 'Timerstart'
-
-# Timer is started when the switch pumprun is set to on. 
+  # Timer is started when the switch pumprun is set to on. 
   trigger: 
-    platform: state
+  - platform: state
     entity_id: switch.pumprun
     to: 'on'
+  action:
+  - service: timer.start
+    entity_id: timer.test
 
 # When timer is stopped, the time run out, another message is sent
-- action:
-  - service: notify.nma
-    data:
-      message: "Timer stop"
-  alias: Timerstop
+- alias: Timerstop
   id: 'Timerstop'
   trigger: 
-    platform: event
+  - platform: event
     event_type: timer.finished
     event_data: 
       entity_id: timer.test
+  action:
+  - service: notify.nma
+    data:
+      message: "Timer stop"
 ```
 
 ### {% linkable_title Control a timer from the frontend %}

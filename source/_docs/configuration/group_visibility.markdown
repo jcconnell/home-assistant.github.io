@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Group Visibility"
-description: "Instructions how to change group visibility using automations."
+description: "Instructions on how to change group visibility using automations."
 date: 2016-10-29 13:00
 sidebar: true
 comments: false
@@ -104,7 +104,7 @@ sensor:
     command: "python3 occasion.py"
 ```
 <p class='note'>
-If you are using docker to run Home Assistant then the occasion.py script will be placed under /config. Your command should instead be: command: "python3 /command/occasion.py"
+If you are using docker to run Home Assistant then the occasion.py script will be placed under /config. Your command should instead be: command: "python3 /config/occasion.py"
 </p>
 
 

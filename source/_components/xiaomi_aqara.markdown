@@ -18,6 +18,9 @@ The `xiaomi_aqara` component allows you to integrate [Xiaomi](http://www.mi.com/
 
 #### {% linkable_title Supported Devices %}
 
+- Xiaomi Aqara Gateway (lumi.gateway.v2, lumi.gateway.v3)
+- Aqara Air Conditioning Companion (lumi.acpartner.v3)
+- Aqara Intelligent Door Lock (lock.aq1)
 - Temperature and Humidity Sensor (1st and 2nd generation)
 - Motion Sensor (1st and 2nd generation)
 - Door and Window Sensor (1st and 2nd generation)
@@ -42,8 +45,8 @@ The `xiaomi_aqara` component allows you to integrate [Xiaomi](http://www.mi.com/
 
 - Gateway Radio
 - Gateway Button
-- Aqara Air Conditioning Companion
-- Aqara Intelligent Air Conditioner Controller Hub
+- Xiaomi Mi Air Conditioning Companion (lumi.acpartner.v2)
+- Aqara Intelligent Air Conditioner Controller Hub (lumi.acpartner.v1)
 - Decoupled mode of the Aqara Wall Switches (Single & Double)
 - Additional alarm events of the Gas and Smoke Detector: Analog alarm, battery fault alarm (smoke detector only), sensitivity fault alarm, I2C communication failure
 
@@ -87,14 +90,28 @@ xiaomi_aqara:
 ```
 
 {% configuration %}
-  mac:
-    description: The MAC address of your gateway. *Optional if only using one gateway.*
-    required: false
-    type: string
-  key:
-    description: The key of your gateway. *Optional if only using sensors and/or binary sensors.*
-    required: false
-    type: string
+  gateways:
+    description: A list of gateways to set up.
+    required: true
+    type: map
+    keys:
+      mac:
+        description: The MAC address of your gateway. *Optional if only using one gateway.*
+        required: false
+        type: string
+      key:
+        description: The key of your gateway. *Optional if only using sensors and/or binary sensors.*
+        required: false
+        type: string
+      host:
+        description: The host/IP address of the gateway. If this parameter is used the multicast discovery of the gateway is skipped.
+        required: false
+        type: string
+      disable:
+        description: Disable the gateway. This is only useful if you don't want to integrate a specific gateway.
+        required: false
+        type: boolean
+        default: false
   discovery_retry:
     description: Number of times that Home Assistant should try to reconnect to the gateway.
     required: false
@@ -105,10 +122,6 @@ xiaomi_aqara:
     required: false
     type: string
     default: any
-  host:
-    description: The host/IP address of the gateway. If this parameter is used the multicast discovery of the gateway is skipped.
-    required: false
-    type: string
 {% endconfiguration %}
 
 ### {% linkable_title Services %}
@@ -158,12 +171,6 @@ Allowed values of the `ringtone_id` are:
 #### {% linkable_title Service `xiaomi_aqara.stop_ringtone` %}
 
 Stops a playing ringtone immediately.
-
-| Service data attribute    | Optional | Description                                           |
-|---------------------------|----------|-------------------------------------------------------|
-| `gw_mac`                  |       no | MAC address of the Xiaomi Aqara Gateway               |
-
-#### {% linkable_title Service `xiaomi_aqara.add_device` %}
 
 | Service data attribute    | Optional | Description                                           |
 |---------------------------|----------|-------------------------------------------------------|

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Emulated Hue Bridge"
-description: "Instructions how to emulated Hue Bridge within Home Assistant."
+description: "Instructions on how to emulated Hue Bridge within Home Assistant."
 date: 2016-08-26 08:00
 sidebar: true
 comments: false
@@ -14,7 +14,7 @@ ha_iot_class: "Local Push"
 ---
 
 <p class='note warning'>
-Be aware that `emulated_hue` doesn't work for new **Google Home** users. If you're a new user of Google Home, use the [Google Assistant component](https://home-assistant.io/components/google_assistant/).
+Be aware that `emulated_hue` doesn't work for new **Google Home** users. If you're a new user of Google Home, use the [Google Assistant component](/components/google_assistant/).
 </p>
 
 The `emulated_hue` component provides a virtual Philips Hue bridge, written entirely in software, which allows services that work with the Hue API to interact with Home Assistant
@@ -27,6 +27,10 @@ A physical Hue Bridge is required for Philips Hue lights to function - this virt
 
 <p class='note'>
 It is recommended to assign a static IP address to the computer running Home Assistant. This is because the Amazon Echo discovers devices by IP addresses, and if the IP changes, the Echo won't be able to control it. This is easiest done from your router, see your router's manual for details.
+</p>
+
+<p class='note'>
+Both Google Home and Alexa use the device they were initially set up with for communication with emulated_hue. In other words: if you remove/replace this device you will also break emulated_hue.
 </p>
 
 ### {% linkable_title Configuration %}
@@ -122,7 +126,7 @@ An additional step is required to run Home Assistant as a non-root user and use 
 ```bash
 sudo setcap 'cap_net_bind_service=+ep' /srv/homeassistant/homeassistant_venv/bin/python3
 ```
-Please note that your path may be different depending on your installation method. For example, if you followed the [Virtualenv instructions](https://home-assistant.io/docs/installation/virtualenv/), your path will be `/srv/homeassistant/bin/python3`.
+Please note that your path may be different depending on your installation method. For example, if you followed the [Virtualenv instructions](/docs/installation/virtualenv/), your path will be `/srv/homeassistant/bin/python3`.
 
 ### {% linkable_title License %}
 

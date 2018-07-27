@@ -69,7 +69,7 @@ frontend:
       primary-color: blue
 ```
 
-The example above defined two themes named `happy` and `sad`. For each theme you can set values for CSS variables. For a partial list of variables used by the main frontend see [ha-style.html](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/resources/ha-style.html).
+The example above defined two themes named `happy` and `sad`. For each theme you can set values for CSS variables. For a partial list of variables used by the main frontend see [ha-style.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/resources/ha-style.js).
 
 There are 2 themes-related services:
 
@@ -135,7 +135,7 @@ Those will be loaded via `<link rel='import' href='{{ extra_url }}' async>` on a
 
 ### {% linkable_title Manual Language Selection %}
 
-The browser language is automatically detected. To use a different language, go to **General** in the Configuration panel and select a one from "Choose a Language". It will be applied immediately.
+The browser language is automatically detected. To use a different language, go to **General** in the Configuration panel and select one from "Choose a Language". It will be applied immediately.
 
 <p class='img'>
   <img src='/images/frontend/choose-language.png' />

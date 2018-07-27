@@ -35,6 +35,10 @@ Currently, version 0.1.4-beta2 of the custom firmware is the highest supported. 
 </p>
 
 <p class='note warning'>
+Hassbian users: don't forget to install ffmpeg support on your platform, otherwise, you'll not see video.
+</p>
+
+<p class='note warning'>
 Some alternative Yi firmwares enable an experimental RTSP server, which will allow you to connect to your camera via other Home Assistant camera platforms. However, this RTSP server disables the ability to use the supremely-useful Yi Home app. In order to maintain both Home Assistant compatibility _and_ the native app, this platform retrieves videos via FTP.
 </p>
 
@@ -68,7 +72,7 @@ Configuration variables:
 - **password** (*Required*): The password to the FTP server on the camera (from above).
 - **path** (*Optional*): The path to the raw MP4 files. Defaults to `/tmp/sd/record`.
 - **username** (*Optional*): The user that can access the FTP server. Defaults to `root`.
-- **ffmpeg_arguments** (*Optional*): Extra options to pass to `ffmpeg` (e.g. image quality or video filter options).
+- **ffmpeg_arguments** (*Optional*): Extra options to pass to `ffmpeg` (e.g., image quality or video filter options).
 
 ## {% linkable_title Image quality %}
 

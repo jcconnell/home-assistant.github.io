@@ -43,7 +43,7 @@ On Raspberry Pi you will need to enable the serial interface in the `raspi-confi
 ```yaml
 # Example configuration.yaml entry
 zwave:
-  usb_path: /dev/ttyUSB0
+  usb_path: /dev/ttyACM0
 ```
 
 {% configuration zwave %}
@@ -53,7 +53,7 @@ usb_path:
   type: string
   default: /zwaveusbstick
 network_key:
-  description: The 16-byte network key in the form `"0x01, 0x02..."` used in order to connect securely to compatible devices.
+  description: The 16-byte network key in the form `"0x01, 0x02..."` used in order to connect securely to compatible devices. It is recommended that a network key is configured as security enabled devices may not function correctly if they are not added securely.
   required: false
   type: string
   default: None
@@ -77,12 +77,7 @@ debug:
   required: false
   type: boolean
   default: False
-new_entity_ids:
-  description: Switch to new entity_id generation.
-  required: false
-  type: boolean
-  default: True
-device_config:
+device_config / device_config_domain / device_config_glob:
   description: This attribute contains node-specific override values. (For releases prior to 0.39 this variable is called **customize**) See [Customizing devices and services](/docs/configuration/customizing-devices/) for the format.
   required: false
   type: string, list
@@ -140,7 +135,7 @@ Or, if there is no result, try to find detailed USB connection info with:
 $ dmesg | grep USB
 ```
 
-If Home Assistant (`hass`) runs with another user (e.g. *homeassistant* on Hassbian) give access to the stick with:
+If Home Assistant (`hass`) runs with another user (e.g., *homeassistant* on Hassbian) give access to the stick with:
 
 ```bash
 $ sudo usermod -a -G dialout homeassistant
@@ -210,7 +205,7 @@ The first run after adding a device is when the `zwave` component will take time
 
 ### {% linkable_title Component could not be set up %}
 
-Sometimes the device may not be accessible and you'll get an error message upon startup about not being able to set up Z-Wave. Run the following command for your device path:
+Sometimes the device may not be accessible and you'll get an error message upon startup about not being able to set up Z-Wave. Run the following command for your device path (here we're using `/dev/ttyAMA0` for our Razberry board):
 
 ```bash
 $ ls -l /dev/ttyAMA0
@@ -227,6 +222,18 @@ The important pieces are the first piece `crw-rw----` and the group `dialout`. I
 ```bash
 $ sudo chgrp dialout /dev/ttyAMA0
 $ sudo chmod g+rw /dev/ttyAMA0
+```
+
+Check too that the account you're running Home Assistant as is in the `dialout` group. For instance, if you're using `homeassistant`:
+
+```bash
+$ groups homeassistant
+```
+
+That should include `dialout`, if it doesn't then:
+
+```bash
+$ sudo usermod -G dialout homeassistant
 ```
 
 ### {% linkable_title Device path changes %}

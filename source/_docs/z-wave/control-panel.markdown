@@ -32,12 +32,16 @@ Here is where you [include and exclude](/docs/z-wave/adding/) Z-Wave devices fro
 
 ## {% linkable_title Z-Wave Node Management %}
 
+<p class='note warning'>
+Since 0.63 and the new experimental [entity registry](/docs/configuration/entity-registry/) **Rename Node** no longer changes the entity id for anything other than the `zwave.` entity for the node (it does change the default *friendly_name* attribute for all the entities). If you would like to update the entity id after renaming a z-wave device, you need to manually edit the [entity_registry.yaml](/docs/configuration/entity-registry/) file. See [this issue](https://github.com/home-assistant/home-assistant/issues/12430).
+</p>
+
 * **Refresh Node** refreshes the information on the node and its entities. If used on a battery powered device, the device will first need to wake for this to work.
 * **Remove Failed Node** will remove a failed node from the network. The node needs to be on the controller's Failed Node List (marked as `is_failed: true`), otherwise this command will fail.
 * **Replace Failed Node** will replace a failed device with another. If the node is not in the controller's Failed Node List, or the node responds, this command will fail.
 * **Print Node** prints all state of Z-Wave node to the console log
 
-* **Rename Node** sets a node's name - this won't happen immediately, and requires you to restart Home Assistant (not reboot) to set the new name
+* **Rename Node** sets the name of the `zwave` entity - this won't happen immediately, and requires you to restart Home Assistant (not reboot) to set the new name. Other entities of a device are renamed using the [entity registry](/docs/configuration/entity-registry/).
 
 * **Heal Node** starts healing of the node.(Update neighbor list and update return routes)
 
@@ -78,10 +82,8 @@ This will display the Z-Wave related information about the node:
 * **lastResponseRTT** The Round Trip Time of the response to the last request
 * **manufacturer_name** The name of the manufacturer, as supplied by OpenZWave
 * **max_baud_rate** The maximum bandwidth the device supports, most modern devices will support 40,000 or higher
-* **new_entity_id** In 0.47, Home Assistant introduced a new naming convention for entities, this shows the new naming convention
 * **node_id** The unique node ID of this node
 * **node_name** The base name of this node, this is used to build the entity ID of all entities of this node
-* **old_entity_id** If `new_entity_ids: false` has been configured, then this is the entity_id that will be used. Support for this will be removed in the future
 * **product_name** The product name of the device, as supplied by OpenZWave
 * **query_stage** The query stage for this device (see [here](/docs/z-wave/query-stage/) for details)
 * **receivedCnt** The number of messages received from the device
@@ -105,6 +107,16 @@ Where the device supports the *Association* command class, this will allow you t
 You can use this to enable one device to directly control another. This is primarily useful for remote controls that operate lights or switches, or where you want to have multiple devices operate as one.
 
 There may be multiple groups, that are used for different purposes. The manual of your device will explain what each group is for.
+
+#### {% linkable_title Broadcast group %}
+
+Some Z-Wave devices may associate themselves with the broadcast group (group 255). You'll be able to tell if this has happened if opening a door (or triggering a motion sensor) causes lights to come on, and closing the door (or the motion sensor going clear) causes lights to run off. There's no way to clear this from the control panel, but you can use the `zwave.change_association` service:
+
+```json
+{"association": "remove", "node_id": 3, "group": 1, "target_node_id": 255}
+```
+
+That would remove the broadcast group from association group 1 of the device with node_id 3.
 
 ### {% linkable_title Node config options %}
 
@@ -130,6 +142,20 @@ If your node has user codes, you can set and delete them. The format is raw hex 
 Some non compliant device like tag readers, have implemented to use raw hex code.
 Please refer to a hex ascii table to set your code. Example: http://www.asciitable.com/
 
+Here is a small Python program than will take numbers on the command line and print the correct sequence for compliant devices:
+
+```python
+#! /usr/bin/python3
+import sys
+
+translations = {}
+
+for x in range(0, 10):
+    translations["%s" % x] = "\\x3%s" % x
+
+for c in sys.argv[1]:
+    print(translations[c], end='')
+```
 
 ## {% linkable_title OZW Log %}
 

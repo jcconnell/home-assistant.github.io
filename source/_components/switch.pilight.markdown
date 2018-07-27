@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Pilight Switch"
-description: "Instructions how to have switches using 433 MHz connected to a computer running pilight."
+description: "Instructions on how to have switches using 433 MHz connected to a computer running pilight."
 date: 2015-06-10 22:41
 sidebar: true
 comments: false
@@ -18,6 +18,8 @@ The `pilight` switch platform is issuing 433 MHz commands using [pilight](https:
 Additionally, RF commands can be defined that trigger this switch to turn on and off. This allows you to also use the remote shipped with your 433 MHz switch without mixing up the Home Assistant states. You can even define several on/off commands, thus several RF remotes to toggle this switch.
 
 To be really sure that Home Assistant knows the actual state of your device it is recommended to use the RF remote with codes unknown to any of your 433 MHz devices. Thus you use the remote to trigger this switch to send the correct RF code to the device.
+
+## {% linkable_title Configuration %}
 
 To define a Pilight switch, add the following lines to your `configuration.yaml`:
 

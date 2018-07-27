@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Alexa / Amazon Echo"
-description: "Instructions how to connect Alexa/Amazon Echo to Home Assistant."
+description: "Instructions on how to connect Alexa/Amazon Echo to Home Assistant."
 date: 2015-12-13 13:02
 sidebar: true
 comments: false
@@ -46,7 +46,7 @@ Additionally, note that at the time of this writing, your Alexa skill endpoint *
   OR
   2. Change your Home Assistant serving port to 443 this is done in the [`http`](/components/http/) section with the `server_port` entry in your `configuration.yaml` file
 
-[blog-lets-encrypt]: https://home-assistant.io/blog/2015/12/13/setup-encryption-using-lets-encrypt/
+[blog-lets-encrypt]: /blog/2015/12/13/setup-encryption-using-lets-encrypt/
 
 To get started with Alexa skills:
 
@@ -167,7 +167,7 @@ intent_script:
       text: OK
 ```
 
-Here we are using [templates] to take the name we gave to Alexa e.g. `downstairs on` and replace the space with an underscore so it becomes `downstairs_on` as Home Assistant expects.
+Here we are using [templates] to take the name we gave to Alexa e.g., `downstairs on` and replace the space with an underscore so it becomes `downstairs_on` as Home Assistant expects.
 
 Now say `Alexa ask Home Assistant to activate <some scene>` and Alexa will activate that scene for you.
 
@@ -375,7 +375,7 @@ which accepts and returns messages conforming to the
 [Smart Home v3 payload](https://developer.amazon.com/docs/smarthome/smart-home-skill-api-message-reference.html).
 You must then create an Amazon developer account with an Alexa skill and Lambda
 function to integrate this endpoint. See
-[Haaska](https://github.com/auchter/haaska) for an example.
+[Haaska](https://github.com/mike-grant/haaska) for an example.
 
 [amazon-dev-console]: https://developer.amazon.com
 [flash-briefing-api]: https://developer.amazon.com/alexa-skills-kit/flash-briefing

@@ -23,11 +23,11 @@ The default InfluxDB configuration doesn't enforce authentication. If you have i
 influxdb:
 ```
 
-You will still need to create a database named `home_assistant` via InfluxDB's web interface or command line. For instructions how to create a database check the [InfluxDB documentation](https://docs.influxdata.com/influxdb/latest/introduction/getting_started/#creating-a-database) relevant to the version you have installed.
+You will still need to create a database named `home_assistant` via InfluxDB's command line interface. For instructions on how to create a database check the [InfluxDB documentation](https://docs.influxdata.com/influxdb/latest/introduction/getting_started/#creating-a-database) relevant to the version you have installed.
 
 Configuration variables:
 
-- **host** (*Optional*): IP address of your database host, e.g. 192.168.1.10. Defaults to `localhost`.
+- **host** (*Optional*): IP address of your database host, e.g., 192.168.1.10. Defaults to `localhost`.
 - **port** (*Optional*): Port to use. Defaults to 8086.
 - **username** (*Optional*): The username of the database user. The user needs read/write privileges on the database.
 - **password** (*Optional*): The password for the database user account.
@@ -37,7 +37,7 @@ Configuration variables:
 - **max_retries** (*Optional*): Allow the component to retry if there was a network error when transmitting data
 - **default_measurement** (*Optional*): Measurement name to use when an entity doesn't have a unit. Defaults to entity id.
 - **override_measurement** (*Optional*): Measurement name to use instead of unit or default measurement. This will store all data points in a single measurement.
-- **component_config**, **component_config_domain**, **component_config_glob** (*Optional*): These attributes contains component-specific override values. See [Customizing devices and services](https://home-assistant.io/getting-started/customizing-devices/) for format.
+- **component_config**, **component_config_domain**, **component_config_glob** (*Optional*): These attributes contains component-specific override values. See [Customizing devices and services](/getting-started/customizing-devices/) for format.
   - **override_measurement** (*Optional*): Measurement name to use for this component, takes precedence over the global 'override_measurement' and component-specific 'unit_of_measurement' attribute.
 - **exclude** (*Optional*): Configure which components should be excluded from recording to InfluxDB.
   - **entities** (*Optional*): The list of entity ids to be excluded from recording to InfluxDB.

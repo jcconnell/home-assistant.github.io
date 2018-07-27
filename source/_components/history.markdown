@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "History"
-description: "Instructions how to enable history support for Home Assistant."
+description: "Instructions on how to enable history support for Home Assistant."
 date: 2015-03-23 19:59
 sidebar: true
 comments: false
@@ -120,7 +120,7 @@ When the `history` component queries the states table it only selects states whe
 
 #### {% linkable_title On dates %} 
 
-SQLite databases do not support native dates. That's why all the dates are saved in seconds since the UNIX epoch. Convert them manually using this site or in Python:
+SQLite databases do not support native dates. That's why all the dates are saved in seconds since the UNIX epoch. Convert them manually using [this site](https://www.epochconverter.com/) or in Python:
 
 ```python
 from datetime import datetime

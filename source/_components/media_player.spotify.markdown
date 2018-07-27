@@ -29,7 +29,7 @@ To create the required Spotify Application:
 
 - Login to [Spotify Developer](https://developer.spotify.com)
 - Visit the [My Applications](https://developer.spotify.com/my-applications/#!/applications) page
-- Select **Create An App**. Enter any name and description. Once your application is created, view it and copy your **Client ID** and **Client Secret**, which are used in the Home Assistant configuration file. 
+- Select **Create An App**. Enter any name and description. Once your application is created, view it and copy your **Client ID** and **Client Secret**, which are used in the Home Assistant configuration file.
 - Add a **Redirect URI** in the following forms:
 
  No SSL: `http://<your_home_assistant_url_or_local_ip>:<port>/api/spotify`
@@ -38,7 +38,7 @@ To create the required Spotify Application:
 
 The URL is whatever you use to access Home Assistant from outside your network (including port if applicable).
 
-- Click **Save** after adding the URI. You may also need to set the `base_url` attribute of the [HTTP Component](https://home-assistant.io/components/http/).
+- Click **Save** after adding the URI. You may also need to set the `base_url` attribute of the [HTTP Component](/components/http/).
 
 
 ## {% linkable_title Configuration %}
@@ -73,6 +73,5 @@ The sources are based on if you have streamed to these devices before in Spotify
 ## {% linkable_title URI Links For Playlists/Etc %}
 You can send playlists to spotify via the "media_content_type": "playlist" and "media_content_id": "spotify:user:spotify:playlist:37i9dQZF1DWSkkUxEhrBdF" which are a part of the media_player.play_media service, you can test this from the services control panel in the Home Assistant frontend.
 
-In this example this is a URI link to the Reggae Infusions playlist, the link below from Spotify explains how to get this URI value to use for playlists in the Spotify component.
+In this example this is a URI link to the Reggae Infusions playlist, [this support document from Spotify](https://support.spotify.com/us/using_spotify/share_music/why-do-you-have-two-different-link-formats/) explains how to get this URI value to use for playlists in the Spotify component.
 
-https://support.spotify.com/us/using_spotify/share_music/why-do-you-have-two-different-link-formats/
